@@ -6,7 +6,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/index.js',
-    another: './src/another-module.js'
+    another: './src/another-module.js',
+    vendor: [
+      'lodash'
+    ]
   },
   module: {
     rules: [
@@ -19,7 +22,12 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Production'
+      title: 'Caching'
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common' // 指定公共 bundle 的名称。
@@ -28,7 +36,7 @@ module.exports = {
     // new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
 };
