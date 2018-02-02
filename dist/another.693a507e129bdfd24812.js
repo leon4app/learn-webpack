@@ -1,2 +1,0 @@
-webpackJsonp([2],{ytZv:function(e,o,n){"use strict";Object.defineProperty(o,"__esModule",{value:!0});var t=n("M4fF"),l=n.n(t);console.log(l.a.join(["Another","module","loaded!"]," "))}},["ytZv"]);
-//# sourceMappingURL=another.693a507e129bdfd24812.js.map

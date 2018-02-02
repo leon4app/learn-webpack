@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.ts',
+    'src/app': './src/index.js',
     another: './src/another-module.js',
     vendor: [
       'lodash'
@@ -17,16 +17,8 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      }
     ]
   },  
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
-  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
@@ -35,11 +27,14 @@ module.exports = {
     new webpack.HashedModuleIdsPlugin(),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: 'vendor',
+      minChunks: Infinity,
+      // (随着 entry chunk 越来越多，
+      // 这个配置保证没其它的模块会打包进 vendor chunk)
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common' // 指定公共 bundle 的名称。
-    })
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'common' // 指定公共 bundle 的名称。
+    // })
     // new webpack.NamedModulesPlugin(),
     // new webpack.HotModuleReplacementPlugin()
   ],
