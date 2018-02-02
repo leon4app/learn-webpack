@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    'src/app': './src/index.js',
+    'app/index': './src/index.js',
     another: './src/another-module.js',
     vendor: [
       'lodash'
@@ -27,14 +27,10 @@ module.exports = {
     new webpack.HashedModuleIdsPlugin(),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      name: ['common','vendor','manifest'],
       minChunks: Infinity,
-      // (随着 entry chunk 越来越多，
-      // 这个配置保证没其它的模块会打包进 vendor chunk)
+      // (随着 entry chunk 越来越多，这个配置保证没其它的模块会打包进 vendor chunk)
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common' // 指定公共 bundle 的名称。
-    // })
     // new webpack.NamedModulesPlugin(),
     // new webpack.HotModuleReplacementPlugin()
   ],
