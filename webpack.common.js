@@ -2,15 +2,24 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const glob = require('glob')
+
+var entries= function () {
+    var srcDir = path.resolve(__dirname, 'src')
+    var entryFiles = glob.sync(srcDir + '/*.{js,jsx}')
+    var map = {};
+
+    for (var i = 0; i < entryFiles.length; i++) {
+        var filePath = entryFiles[i];
+        var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
+        map[filename] = filePath;
+    }
+    return map;
+}
 
 module.exports = {
-  entry: {
-    'app/index': './src/index.js',
-    another: './src/another-module.js',
-    vendor: [
-      'lodash'
-    ]
-  },
+  entry: entries(),
+
   module: {
     rules: [
       {
