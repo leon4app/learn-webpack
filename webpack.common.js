@@ -11,7 +11,8 @@ var entries= function () {
 
     for (var i = 0; i < entryFiles.length; i++) {
         var filePath = entryFiles[i];
-        var filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
+        // 裁切filePath相对于src的子串
+        var filename = filePath.replace(srcDir+"/","")
         map[filename] = filePath;
     }
     return map;
