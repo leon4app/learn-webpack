@@ -6,7 +6,7 @@ const glob = require('glob')
 
 var entries= function () {
     var srcDir = path.resolve(__dirname, 'src')
-    var entryFiles = glob.sync(srcDir + '/*.{js,jsx}')
+    var entryFiles = glob.sync(srcDir + '/**/*.{js,jsx}')
     var map = {};
 
     for (var i = 0; i < entryFiles.length; i++) {
