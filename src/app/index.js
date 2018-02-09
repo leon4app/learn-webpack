@@ -15,6 +15,8 @@ function component() {
   element.appendChild(br);
   element.appendChild(btn);
   // element.onclick = Print.bind(null, 'Hello webpack!');
+
+  // Lazy load
   // Note that because a network request is involved, some indication
   // of loading would need to be shown in a production-level site/app.
   btn.onclick = e => import(/* webpackChunkName: "print" */ '../print/print').then(module => {
